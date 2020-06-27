@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 centered card-container">
+            <div class="card content" [ngClass]="isFlipped ? 'card-flip' : ''">
+                <div class="front">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">URL SHORTENER</h5>
+                        <form action="#" class="mt-5"> 
+                            <input type="text" class="form-control" placeholder="Enter url to shorten">
+                            <div class="text-right mt-2">
+                                <button type="button" class="btn btn-primary" (click)="flip()">Shorten!</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="back">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">URL SHORTENER</h5>
+                        <p>Original url: </p>
+                        <input type="text" class="form-control" value="http://www.google.com" readonly>
+                        <p class="mt-3">Shortened url: </p>
+                        <input type="text" class="form-control" value="http://www.shorty.com/A8vE3o" readonly>
+                        <div class="text-right mt-2">
+                            <button type="button" class="btn btn-primary" (click)="flip()">Let's shorten another link!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
