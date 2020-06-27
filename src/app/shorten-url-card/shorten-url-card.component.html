@@ -5,10 +5,10 @@
                 <div class="front">
                     <div class="card-body">
                         <h5 class="card-title text-center">URL SHORTENER</h5>
-                        <form action="#" class="mt-5"> 
-                            <input type="text" class="form-control" placeholder="Enter url to shorten">
+                        <form [formGroup]="urlToShortenForm" class="mt-5" (ngSubmit)="shortenUrl()"> 
+                            <input formControlName="urlToShorten" id="urlToShorten" type="text" class="form-control" placeholder="Enter url to shorten">
                             <div class="text-right mt-2">
-                                <button type="button" class="btn btn-primary" (click)="flip()">Shorten!</button>
+                                <button type="submit" class="btn btn-primary" (click)="flip()">Shorten!</button>
                             </div>
                         </form>
                     </div>
@@ -17,9 +17,9 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">URL SHORTENER</h5>
                         <p>Original url: </p>
-                        <input type="text" class="form-control" value="http://www.google.com" readonly>
+                        <input type="text" class="form-control" value="{{ originalUrl }}" readonly>
                         <p class="mt-3">Shortened url: </p>
-                        <input type="text" class="form-control" value="http://www.shorty.com/A8vE3o" readonly>
+                        <input type="text" class="form-control" value="{{ shortenedUrl }}" readonly>
                         <div class="text-right mt-2">
                             <button type="button" class="btn btn-primary" (click)="flip()">Let's shorten another link!</button>
                         </div>
