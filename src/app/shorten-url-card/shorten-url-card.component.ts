@@ -33,7 +33,9 @@ export class ShortenUrlCardComponent implements OnInit {
     const url = this.urlToShortenForm.value.urlToShorten;
     this.originalUrl = url;
     this.shortenUrlService.shortenUrl(url)
-      .subscribe(resp => this.shortenedUrl = resp.url)
+	 .subscribe(resp => {
+				this.shortenedUrl = new URL(window.location.href).origin + '/' + resp.path
+	 });
     this.urlToShortenForm.reset();
   }
 
