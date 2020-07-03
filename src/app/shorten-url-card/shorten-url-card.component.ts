@@ -15,7 +15,8 @@ export class ShortenUrlCardComponent implements OnInit {
   originalUrl: string;
   shortenedUrl: string;
 
-  constructor(private shortenUrlService: ShortenUrlHttpService, private formBuilder: FormBuilder) {
+  constructor(private shortenUrlService: ShortenUrlHttpService,
+              private formBuilder: FormBuilder) {
       this.urlToShortenForm = this.formBuilder.group({
         urlToShorten: ['', Validators.required]
       });
@@ -34,9 +35,20 @@ export class ShortenUrlCardComponent implements OnInit {
     this.originalUrl = url;
     this.shortenUrlService.shortenUrl(url)
 	 .subscribe(resp => {
-				this.shortenedUrl = new URL(window.location.href).origin + '/' + resp.path
+        this.shortenedUrl = new URL(window.location.href).origin + '/' + resp.path;
+        this.copyToClipboard(this.shortenedUrl);
 	 });
     this.urlToShortenForm.reset();
   }
+
+  copyToClipboard = str => {
+    const el = document.createElement('textarea');
+    el.value = str;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+  };
+
 
 }
