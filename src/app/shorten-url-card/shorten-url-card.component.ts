@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShortenUrlHttpService } from '../shorten-url-http.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { AlertService } from '../alert.service';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class ShortenUrlCardComponent implements OnInit {
   shortenedUrl: string;
 
   constructor(private shortenUrlService: ShortenUrlHttpService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private alertService: AlertService) {
       this.urlToShortenForm = this.formBuilder.group({
         urlToShorten: ['', Validators.required]
       });
@@ -28,6 +30,7 @@ export class ShortenUrlCardComponent implements OnInit {
 
   flip() {
     this.isFlipped = !this.isFlipped;
+    this.alertService.clear();
   }
 
   shortenUrl(){
@@ -35,8 +38,10 @@ export class ShortenUrlCardComponent implements OnInit {
     this.originalUrl = url;
     this.shortenUrlService.shortenUrl(url)
 	 .subscribe(resp => {
+        this.flip()
         this.shortenedUrl = new URL(window.location.href).origin + '/' + resp.path;
         this.copyToClipboard(this.shortenedUrl);
+        this.alertService.success('Url has been copied to clipboard')
 	 });
     this.urlToShortenForm.reset();
   }

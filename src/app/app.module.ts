@@ -5,15 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ShortenUrlCardComponent } from './shorten-url-card/shorten-url-card.component';
 import { HttpClientModule } from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RedirectToDesiredSiteComponent } from './redirect-to-desired-site/redirect-to-desired-site.component';
+import { AlertComponent } from './alert/alert.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ShortenUrlCardComponent,
-    RedirectToDesiredSiteComponent
+    RedirectToDesiredSiteComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
