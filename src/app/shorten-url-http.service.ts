@@ -30,4 +30,8 @@ export class ShortenUrlHttpService {
 
     return this.http.post<Url>(this.baseUrl + this.shortenUrlEndpoint, urlDto, httpOptions);
   }
+
+  getOriginalUrl(shortenedUrlPath: string): Observable<Url>{
+    return this.http.get<Url>(this.baseUrl + '/v1/' + shortenedUrlPath)
+  }
 }

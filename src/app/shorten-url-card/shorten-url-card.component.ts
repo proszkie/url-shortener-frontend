@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ShortenUrlHttpService } from 'src/shorten-url-http.service';
+import { ShortenUrlHttpService } from '../shorten-url-http.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 
