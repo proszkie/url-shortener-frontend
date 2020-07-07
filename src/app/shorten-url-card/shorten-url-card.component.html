@@ -1,19 +1,24 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 centered card-container">
-            <div class="card content" [ngClass]="isFlipped ? 'card-flip' : ''">
+            <div class="card content card-flip" [ngClass]="isFlipped ? 'rotated' : ''">
                 <div class="front">
                     <div class="card-body">
                         <h5 class="card-title text-center">URL SHORTENER</h5>
                         <form [formGroup]="urlToShortenForm" class="mt-5" (ngSubmit)="shortenUrl()"> 
-                            <input formControlName="urlToShorten" id="urlToShorten" type="text" class="form-control" placeholder="Enter url to shorten">
+                            <input formControlName="urlToShorten" id="urlToShorten" type="text" class="form-control" [class.invalid]="invalid === true" placeholder="Enter url to shorten">
+                            <div *ngIf="invalid" class="error-message">
+                                <p>
+                                    {{errorMessage}}
+                                </p>
+                            </div>
                             <div class="text-right mt-2">
                                 <button type="submit" class="btn btn-primary">Shorten!</button>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="back">
+                <div class="back rotated">
                     <div class="card-body">
                         <h5 class="card-title text-center">URL SHORTENER</h5>
                         <p>Original url: </p>

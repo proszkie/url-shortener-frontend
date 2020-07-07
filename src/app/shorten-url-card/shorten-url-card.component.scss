@@ -6,17 +6,18 @@
     transform: translate(-50%, -50%);
   }
 
-  .content {
-      height: 40vh;
-      background-color: rgba(255, 255, 255, .5);
-  }
+.content {
+    height: 40vh;
+    background-color: rgba(255, 255, 255, .5);
+    transform-style: preserve-3d;
+    transition: all 0.7s ease;
+}
 
-  .card-title {
-      font-size: 2.5em;
-  }
+.card-title {
+    font-size: 2.5em;
+}
 
-
-  .card-container {
+.card-container {
     display: grid;
     perspective: 700px;
 }
@@ -29,14 +30,6 @@
 .content div {
     backface-visibility: hidden;
     transform-style: preserve-3d;
-}
-
-.back {
-    transform: rotateY(-180deg);
-}
-
-.card-container .card-flip {
-    transform: rotateY(180deg);
 }
 
 .card-flip {
@@ -52,5 +45,17 @@
 
 .back {
     grid-area: frontAndBack;
+}
+
+.rotated {
     transform: rotateY(-180deg);
+}
+
+.error-message p{
+    color: red;
+}
+
+input.invalid {
+    border: 2px solid red!important;
+    border-radius: 4px;
 }

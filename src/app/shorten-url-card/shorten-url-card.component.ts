@@ -15,6 +15,8 @@ export class ShortenUrlCardComponent implements OnInit {
   isFlipped = false;
   originalUrl: string;
   shortenedUrl: string;
+  invalid = false;
+  errorMessage = "Invalid url has been supplied";
 
   constructor(private shortenUrlService: ShortenUrlHttpService,
               private formBuilder: FormBuilder,
@@ -31,6 +33,7 @@ export class ShortenUrlCardComponent implements OnInit {
   flip() {
     this.isFlipped = !this.isFlipped;
     this.alertService.clear();
+    this.urlToShortenForm.reset();
   }
 
   shortenUrl(){
@@ -38,12 +41,15 @@ export class ShortenUrlCardComponent implements OnInit {
     this.originalUrl = url;
     this.shortenUrlService.shortenUrl(url)
 	 .subscribe(resp => {
-        this.flip()
+        this.isFlipped = !this.isFlipped;
         this.shortenedUrl = new URL(window.location.href).origin + '/' + resp.path;
         this.copyToClipboard(this.shortenedUrl);
         this.alertService.success('Url has been copied to clipboard')
-	 });
-    this.urlToShortenForm.reset();
+        this.invalid = false;
+   },
+   e => {
+     this.invalid = true;
+   });
   }
 
   copyToClipboard = str => {
