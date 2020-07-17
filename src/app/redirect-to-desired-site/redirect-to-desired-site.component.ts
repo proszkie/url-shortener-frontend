@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ShortenUrlHttpService } from '../shorten-url-http.service';
 import { ActivatedRoute, Router } from "@angular/router";
 import { map } from 'rxjs/operators'
-import { Url } from '../url';
 import { Observable, observable } from 'rxjs';
 
 @Component({
@@ -24,10 +23,10 @@ export class RedirectToDesiredSiteComponent implements OnInit {
       )
       .subscribe(
         response => response.subscribe(
-          url => this.router.navigate([url.url]),
+          url => window.location.href = url.url,
           error => this.router.navigate(['/'])
         )
-      )
+      );
   }
 
 }
