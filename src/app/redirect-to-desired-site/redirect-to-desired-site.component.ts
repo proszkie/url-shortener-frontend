@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShortenUrlHttpService } from '../shorten-url-http.service';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { map } from 'rxjs/operators'
 import { Url } from '../url';
 import { Observable, observable } from 'rxjs';
@@ -13,7 +13,8 @@ import { Observable, observable } from 'rxjs';
 export class RedirectToDesiredSiteComponent implements OnInit {
 
   constructor(private shortenUrlService: ShortenUrlHttpService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.route.params
@@ -22,7 +23,10 @@ export class RedirectToDesiredSiteComponent implements OnInit {
         map(path => this.shortenUrlService.getOriginalUrl(path)),
       )
       .subscribe(
-        response => response.subscribe(url => window.location.href = url.url)
+        response => response.subscribe(
+          url => this.router.navigate([url.url]),
+          error => this.router.navigate(['/'])
+        )
       )
   }
 

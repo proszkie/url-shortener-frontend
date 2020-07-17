@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class ShortenUrlHttpService {
 
-  baseUrl = 'http://127.0.0.1:8080'
+  baseUrl = 'http://url-shortener-dev.eu-west-1.elasticbeanstalk.com'
   shortenUrlEndpoint = '/v1/shorten'
 
   constructor(private http: HttpClient) { }
